@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-* 
+*
 {
     margin: 0;
     padding: 0;
-    border: rgb(0, 0, 0) 0.1rem solid;
+    /* border: rgb(0, 0, 0) 0.1rem solid; */
 }
 
 body
@@ -38,6 +38,54 @@ html
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+#GB_Header:first-child
+{
+    margin-left: 0;
+}
+
+#Logo
+{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 50px;
+    height: 100%;
+}
+
+#Searchbar
+{
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    width: 50%;
+}
+
+#Search_Input
+{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px 12px 60px;
+    width: 100%;
+    background: none;
+    border: rgb(0, 0, 0) 0.1rem solid;
+    border-radius: 15rem;
+    /* font: inherit; */
+    font-size: 1.5rem;
+}
+
+#Search_Icon
+{
+    position: absolute;
+    top: 0;
+    left: 12px;
+    height: 100%;
+    width: 30px;
+    padding: 0 12px;
 }
 
 /* Game Browser Main */
