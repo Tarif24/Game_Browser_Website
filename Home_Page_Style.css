@@ -162,12 +162,53 @@ html
     margin-bottom: 3rem;
 }
 
+/* Game BrowserGames */
+
 #GB_Content_Display_List
 {
     display: flex;
+    flex-wrap: wrap;
 }
 
 #GB_Content_Display_List li
 {
     list-style: none;
+}
+
+.Game_Item
+{
+    border: black 0.1rem solid;
+    border-radius: 2rem;
+    width: 450px;
+}
+
+.Game_Info
+{
+    padding: 0rem 1rem 1rem 1rem;
+}
+
+.Game_Image
+{
+    width: 450px;
+    border-radius: 2rem 2rem 0 0;
+}
+
+.Game_Platforms
+{
+    margin-bottom: 1.5rem;
+}
+
+.Game_Title
+{
+    font-family: "Kanit";
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 80%;
+}
+
+.Game_Minor_Info
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
 }
