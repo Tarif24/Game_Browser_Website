@@ -1,33 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Browser</title>
-    <link rel="stylesheet" href="Home_Page_Style.css">
-</head>
-<body>
-    <div id = "Game_Browser">
-        <header id = "GB_Header">
-            <div id = "Logo">
-                <h1>Game Browser</h1>
-            </div>
-            <form id = "Searchbar">
-                <input id = "Search_Input" type = "text" placeholder = "Search">
-                <svg id = "Search_Icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
-            </form>
-        </header>
+    <link rel="stylesheet" href="Home_Page_Style.css" />
+  </head>
+  <body>
+    <div id="Game_Browser">
+      <header id="GB_Header">
+        <div id="Logo">
+          <h1>Game Browser</h1>
+        </div>
+        <form id="Searchbar">
+          <input id="Search_Input" type="text" placeholder="Search" />
+          <svg
+            id="Search_Icon"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#00000"
+          >
+            <path
+              d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"
+            />
+          </svg>
+        </form>
+      </header>
 
-        <div id = "GB_Main">
-            <div id = "Sidebar">
-                a
+      <div id="GB_Main">
+        <div id="Sidebar">
+            <div id = "Genre_List" class = "Sidebar_Group">
+                <h2 class = "Sidebar_Group_Title">Genres</h2>
+                <ul>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                </ul>
             </div>
-            
-            <div id = GB_Content>
-                a
+            <div id = "Genre_List" class = "Sidebar_Group">
+                <h2 class = "Sidebar_Group_Title">Genres</h2>
+                <ul>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                </ul>
+            </div>
+            <div id = "Genre_List" class = "Sidebar_Group">
+                <h2 class = "Sidebar_Group_Title">Genres</h2>
+                <ul>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                    <li class = "Sidebar_Group_Item"><h3>Action</h3></li>
+                </ul>
             </div>
         </div>
+
+        <div id="GB_Content">
+            <h1 id = "GB_Content_Title">Home Page</h1>
+            <div id = "GB_Content_Filters">
+                <div>Order by: Name</div>
+                <div>Platform: All</div>
+            </div>
+            <div id = "GB_Content_Display">
+                <ul id = "GB_Content_Display_List">
+                    <li>Game</li>
+                </ul>
+            </div>
+        </div>
+      </div>
     </div>
-    <script src = "Home_Page_Script.js"></script>
-</body>
+    <script src="Home_Page_Script.js"></script>
+  </body>
 </html>
