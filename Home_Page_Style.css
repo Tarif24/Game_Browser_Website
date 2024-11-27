@@ -135,6 +135,17 @@ html
     font-weight: 350;
 }
 
+.Sidebar_Group_Item
+{
+    display: flex;
+}
+
+.Sidebar_Group_Item svg
+{
+    width: 30px;
+    height: 30px;
+}
+
 /* Game Browser Content */
 
 #GB_Content
@@ -162,6 +173,24 @@ html
     display: flex;
     gap: 3rem;
     margin-bottom: 3rem;
+}
+
+select
+{
+    border: black 0.2rem solid;
+    border-radius: 2rem;
+    padding: 0.25rem; 
+    transition: all 0.1s ease-in-out;
+}
+
+select:hover
+{
+    border: rgb(100, 100, 100) 0.2rem solid;
+}
+
+.Order_Filter label, .Platform_Filter label
+{
+    font-family: "kanit";
 }
 
 /* Game BrowserGames */
