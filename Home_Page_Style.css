@@ -106,7 +106,7 @@ html
 
 #Sidebar
 {
-    width: 250px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -146,6 +146,7 @@ html
     align-items: left;
     padding-top: 0;
     margin-top: 0;
+    padding: 1rem 4rem 1rem 1rem;
 }
 
 #GB_Content_Title
@@ -153,6 +154,7 @@ html
     font-family: "Kanit";
     font-size: 5rem;
     margin-bottom: 2rem;
+    line-height: 80%;
 }
 
 #GB_Content_Filters
@@ -167,6 +169,7 @@ html
 #GB_Content_Display_List
 {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -179,7 +182,8 @@ html
 {
     border: black 0.1rem solid;
     border-radius: 2rem;
-    width: 450px;
+    width: 350px;
+    margin-bottom: 3rem;
 }
 
 .Game_Info
@@ -189,20 +193,21 @@ html
 
 .Game_Image
 {
-    width: 450px;
+    width: 350px;
     border-radius: 2rem 2rem 0 0;
 }
 
 .Game_Platforms
 {
     margin-bottom: 1.5rem;
+    font-size: 0.9rem;
 }
 
 .Game_Title
 {
     font-family: "Kanit";
     font-weight: 400;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 80%;
 }
 
@@ -211,4 +216,5 @@ html
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
+    font-size: 0.7rem;
 }
