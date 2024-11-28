@@ -14,6 +14,7 @@ body
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
     background: rgb(21, 21, 21);
+    color: white;
 }
 
 html
@@ -77,11 +78,19 @@ html
     box-sizing: border-box;
     padding: 12px 20px 12px 60px;
     width: 100%;
-    background: none;
-    border: rgb(0, 0, 0) 0.1rem solid;
+    border: none;
+    outline: none;
     border-radius: 15rem;
-    /* font: inherit; */
     font-size: 1.5rem;
+    background-color: rgb(59, 59, 59);
+    transition: all 0.2s ease-in-out;
+}
+
+#Search_Input:hover, #Search_Input:focus
+{
+    background: rgb(255, 255, 255);
+    border: none;
+    outline: none;
 }
 
 #Search_Icon
@@ -92,6 +101,13 @@ html
     height: 100%;
     width: 30px;
     padding: 0 12px;
+    fill: rgb(97, 97, 97);
+    transition: all 0.2s ease-in-out;
+}
+
+#Search_Input:hover + #Search_Icon, #Search_Input:focus + #Search_Icon
+{
+    fill: rgb(0, 0, 0);
 }
 
 /* Game Browser Main */
