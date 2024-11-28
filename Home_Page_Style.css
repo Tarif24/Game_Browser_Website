@@ -13,6 +13,7 @@ body
     display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
+    background: rgb(21, 21, 21);
 }
 
 html
@@ -121,29 +122,36 @@ html
     margin-bottom: 0.5rem;
     font-family: "Kanit";
     letter-spacing: 2px;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 .Sidebar_Group ul li
 {
     list-style: none;
     font-family: "Kanit";
+    margin-bottom: 0.5rem;
 }
 
 .Sidebar_Group ul li h3
 {
     font-weight: 350;
+    font-size: 1.5rem;
 }
 
 .Sidebar_Group_Item
 {
     display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 .Sidebar_Group_Item svg
 {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+    background: rgb(151, 151, 151);
+    border-radius: 0.5rem;
+    padding: 0.25rem;
 }
 
 /* Game Browser Content */
@@ -157,7 +165,7 @@ html
     align-items: left;
     padding-top: 0;
     margin-top: 0;
-    padding: 1rem 4rem 1rem 1rem;
+    padding: 1rem 3rem 1rem 3rem;
 }
 
 #GB_Content_Title
