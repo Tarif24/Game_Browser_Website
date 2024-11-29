@@ -141,6 +141,7 @@ html
 
 .Sidebar_Group_Title
 {
+    cursor: default;
     margin-bottom: 0.5rem;
     font-family: "Kanit";
     letter-spacing: 2px;
@@ -208,6 +209,7 @@ html
 
 #GB_Content_Title
 {
+    cursor: default;
     font-family: "Kanit";
     font-size: 5rem;
     margin-bottom: 2rem;
@@ -280,6 +282,13 @@ select option
     width: 385px;
     margin-bottom: 1.5rem;
     background: rgb(35, 35, 35);
+    transition: all 0.2s ease-in-out;
+}
+
+.Game_Item:hover
+{
+    cursor: pointer;
+    transform: scale(1.05, 1.05);
 }
 
 .Game_Info
