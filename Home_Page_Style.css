@@ -59,8 +59,13 @@ html
     left: 50px;
     height: 100%;
     font-family: "Bebas Neue";
-    font-size: 1.5rem;
+    font-size: 1rem;
     letter-spacing: 3px;
+}
+
+#Logo:hover
+{
+    cursor: pointer;
 }
 
 #Searchbar
@@ -68,7 +73,7 @@ html
     position: relative;
     align-self: center;
     justify-self: center;
-    width: 50%;
+    width: 60%;
 }
 
 #Search_Input
@@ -76,14 +81,15 @@ html
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 12px 20px 12px 60px;
+    padding: 5px 20px 5px 50px;
     width: 100%;
     border: none;
     outline: none;
     border-radius: 15rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    font-family: "kanit";
     background-color: rgb(59, 59, 59);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 #Search_Input:hover, #Search_Input:focus
@@ -97,10 +103,10 @@ html
 {
     position: absolute;
     top: 0;
-    left: 12px;
+    left: 10px;
     height: 100%;
-    width: 30px;
-    padding: 0 12px;
+    width: 25px;
+    padding: 0 10px;
     fill: rgb(97, 97, 97);
     transition: all 0.2s ease-in-out;
 }
@@ -123,7 +129,7 @@ html
 
 #Sidebar
 {
-    width: 200px;
+    width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -270,10 +276,10 @@ select option
 
 .Game_Item
 {
-    border: black 0.1rem solid;
     border-radius: 2rem;
-    width: 350px;
-    margin-bottom: 3rem;
+    width: 385px;
+    margin-bottom: 1.5rem;
+    background: rgb(35, 35, 35);
 }
 
 .Game_Info
@@ -283,7 +289,8 @@ select option
 
 .Game_Image
 {
-    width: 350px;
+    width: 385px;
+    height: 220px;
     border-radius: 2rem 2rem 0 0;
 }
 
@@ -296,7 +303,7 @@ select option
 .Game_Title
 {
     font-family: "Kanit";
-    font-weight: 400;
+    font-weight: 600;
     font-size: 1.5rem;
     line-height: 80%;
 }
