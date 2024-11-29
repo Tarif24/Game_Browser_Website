@@ -138,7 +138,8 @@ html
     margin-bottom: 0.5rem;
     font-family: "Kanit";
     letter-spacing: 2px;
-    font-size: 3rem;
+    font-size: 2rem;
+    font-weight: 500;
 }
 
 .Sidebar_Group ul li
@@ -169,7 +170,21 @@ html
     fill: rgb(255, 255, 255);
     border-radius: 0.5rem;
     padding: 0.25rem;
+    transition: all 0.3ss ease-in-out;
 }
+
+.Sidebar_Group_Item:hover
+{
+    cursor: pointer;
+}
+
+.Sidebar_Group_Item:hover svg
+{
+    background: rgb(255, 255, 255);
+    fill: rgb(24, 24, 24);
+}
+
+
 
 /* Game Browser Content */
 
@@ -202,20 +217,41 @@ html
 
 select
 {
-    border: black 0.2rem solid;
+    border: none;
     border-radius: 2rem;
+    background: rgb(45, 45, 45);
     padding: 0.25rem; 
     transition: all 0.1s ease-in-out;
+    color: white;
+    outline: none;
+    font-family: "kanit";
+    font-weight: 300;
 }
 
 select:hover
 {
-    border: rgb(100, 100, 100) 0.2rem solid;
+    cursor: pointer;
+}
+
+select option
+{
+    font-family: "kanit";
+    font-weight: 300;
+    background: white;
+    color: black;
 }
 
 .Order_Filter label, .Platform_Filter label
 {
     font-family: "kanit";
+}
+
+.Order_Filter, .Platform_Filter
+{
+    border: none;
+    border-radius: 1rem;
+    background: rgb(45, 45, 45);
+    padding: 0.5rem;
 }
 
 /* Game BrowserGames */
