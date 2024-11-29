@@ -151,7 +151,7 @@ html
 .Sidebar_Group ul li h3
 {
     font-weight: 350;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .Sidebar_Group_Item
@@ -163,9 +163,10 @@ html
 
 .Sidebar_Group_Item svg
 {
-    width: 35px;
-    height: 35px;
-    background: rgb(151, 151, 151);
+    width: 25px;
+    height: 25px;
+    background: rgb(45, 45, 45);
+    fill: rgb(255, 255, 255);
     border-radius: 0.5rem;
     padding: 0.25rem;
 }
