@@ -205,6 +205,8 @@ html
     padding-top: 0;
     margin-top: 0;
     padding: 1rem 3rem 1rem 3rem;
+
+    display: none;
 }
 
 #GB_Content_Title
@@ -262,7 +264,7 @@ select option
     padding: 0.5rem;
 }
 
-/* Game BrowserGames */
+/* Game Browser Games */
 
 #GB_Content_Display_List
 {
@@ -324,3 +326,6 @@ select option
     margin-top: 1.5rem;
     font-size: 0.7rem;
 }
+
+/* Game Item Page */
+
