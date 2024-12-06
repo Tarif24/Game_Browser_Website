@@ -205,8 +205,6 @@ html
     padding-top: 0;
     margin-top: 0;
     padding: 1rem 3rem 1rem 3rem;
-
-    /* display: none; */
 }
 
 #GB_Content_Title
@@ -333,10 +331,114 @@ select option
 {
     flex: 1;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#Game_Item_Page_Container
+{
+    display: flex;
     flex-direction: column;
     justify-content: Top;
     align-items: left;
     padding: 1rem 3rem 1rem 3rem;
-
-    display: none;
+    width: 40%;
 }
+
+.Game_Item_Title
+{
+    cursor: default;
+    font-family: "Kanit";
+    font-size: 5rem;
+    margin-bottom: 2rem;
+    line-height: 80%;
+}
+
+.Rankings
+{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 1rem 1rem 0rem;
+}
+
+.Ranking_Item
+{
+    border: white 0.1rem solid;
+    border-radius: 5rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.Description
+{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.About_Title
+{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.Game_Item_Meta
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 450px;
+    width: 100%;
+}
+
+.Game_Item_Meta_Block
+{
+    margin-bottom: 1.5rem;
+    width: 50%;
+}
+
+.Game_Item_Meta_Block_Wide
+{
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.Game_Item_Meta_Title
+{
+    color: rgb(69, 69, 69);
+    margin-bottom: 0.3rem;
+}
+
+.Game_Item_Meta_Text
+{
+    text-decoration: underline;
+}
+
+.Game_Item_System_Requierments
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.Requierment_Title
+{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+}
+
+.Requierment_List
+{
+    padding-left: 3rem;
+}
+
+.Requierment_Item
+{
+    font-size: 0.8rem;
+}
+
+
