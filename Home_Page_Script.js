@@ -1,13 +1,13 @@
 // API Variables
 const APIKEY = "c893cee9cd204b15a38f977a32547d08";
 
+// Html elements
 const Logo = document.querySelector("#Logo");
-let gameItemsList;
 const GBContent = document.querySelector("#GB_Content");
 const GameItemPage = document.querySelector("#Game_Item_Page");
 const GameContentDisplayList = document.querySelector("#GB_Content_Display_List");
 
-// Initilize
+// INITILIZING
 async function InitialAPICall() {
     try {
         const apiCall = await fetch(
@@ -21,16 +21,19 @@ async function InitialAPICall() {
     }
 }
 
+// Initial Event listeners
 Logo.addEventListener("click", () => {
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";
 });
 
+// calls all the initializing functions
 (() => {
     InitialAPICall();
 })();
 
-// Helper Functions
+// HELPER FUNCTIONS
+
 function UpdateGameContentDisplay(gameslist, isnew) {
     if (isnew) {
         GameContentDisplayList.innerHTML = "";
@@ -47,10 +50,12 @@ function UpdateGameContentDisplay(gameslist, isnew) {
     }
 }
 
+
 function CreateGameItem(game) {
     const gameItemLI = document.createElement("li");
 
     let genrelist = "";
+    let platformlist = "";
     let ctr = 0;
 
     game.genres.forEach((genre, idx, arr) =>
@@ -67,6 +72,23 @@ function CreateGameItem(game) {
             genrelist = genrelist + "+" + remaining
         }
     })
+    
+    ctr = 0;
+
+    game.platforms.forEach((platform, idx, arr) =>
+        {
+            if(ctr < 2)
+            {
+                platformlist = platformlist + platform.platform.name + ", ";
+                ctr = ctr + 1;
+            }
+            else if (ctr == 2) // find better soloution
+            {
+                ctr = ctr + 1;
+                let remaining = arr.length - 2;
+                platformlist = platformlist + "+" + remaining
+            }
+        })
 
     gameItemLI.className = "Game_Item";
     gameItemLI.innerHTML = `
@@ -78,7 +100,7 @@ function CreateGameItem(game) {
     <div class="Game_Info">
        <div class="Game_Info_Top">
             <p class="Game_Platforms">
-                Platforms Avalable:
+                ${platformlist}
             </p>
 
             <p class="Game_Metacritic">
