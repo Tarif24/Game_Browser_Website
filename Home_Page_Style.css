@@ -303,6 +303,20 @@ select option
     border-radius: 2rem 2rem 0 0;
 }
 
+.Game_Info_Top
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Game_Metacritic
+{
+    border: white 0.1rem solid;
+    border-radius: 0.5rem;
+    height: fit-content;
+    padding: 0.3rem;
+}
+
 .Game_Platforms
 {
     margin-bottom: 1.5rem;
