@@ -5,7 +5,9 @@ const APIKEY = "c893cee9cd204b15a38f977a32547d08";
 const Logo = document.querySelector("#Logo");
 const GBContent = document.querySelector("#GB_Content");
 const GameItemPage = document.querySelector("#Game_Item_Page");
-const GameContentDisplayList = document.querySelector("#GB_Content_Display_List");
+const GameContentDisplayList = document.querySelector(
+    "#GB_Content_Display_List"
+);
 
 // INITILIZING
 async function InitialAPICall() {
@@ -15,7 +17,7 @@ async function InitialAPICall() {
         );
         const jsontodata = await apiCall.json();
         console.log(jsontodata);
-        UpdateGameContentDisplay(jsontodata.results, true)
+        UpdateGameContentDisplay(jsontodata.results, true);
     } catch (error) {
         console.log(error);
     }
@@ -38,18 +40,15 @@ function UpdateGameContentDisplay(gameslist, isnew) {
     if (isnew) {
         GameContentDisplayList.innerHTML = "";
 
-        gameslist.forEach(game => 
-        {
+        gameslist.forEach((game) => {
             GameContentDisplayList.append(CreateGameItem(game));
-        })
+        });
     } else {
-        gameslist.forEach(game => 
-            {
-                GameContentDisplayList.append(CreateGameItem(game));
-            })
+        gameslist.forEach((game) => {
+            GameContentDisplayList.append(CreateGameItem(game));
+        });
     }
 }
-
 
 function CreateGameItem(game) {
     const gameItemLI = document.createElement("li");
@@ -58,38 +57,33 @@ function CreateGameItem(game) {
     let platformlist = "";
     let ctr = 0;
 
-    game.genres.forEach((genre, idx, arr) =>
-    {
-        if(ctr < 3)
-        {
+    game.genres.forEach((genre, idx, arr) => {
+        if (ctr < 3) {
             genrelist = genrelist + genre.name + ", ";
             ctr = ctr + 1;
-        }
-        else if (ctr == 3) // find better soloution
-        {
+        } else if (ctr == 3) {
+            // find better soloution
             ctr = ctr + 1;
             let remaining = arr.length - 3;
-            genrelist = genrelist + "+" + remaining
+            genrelist = genrelist + "+" + remaining;
         }
-    })
-    
+    });
+
     ctr = 0;
 
-    game.platforms.forEach((platform, idx, arr) =>
-        {
-            if(ctr < 2)
-            {
-                platformlist = platformlist + platform.platform.name + ", ";
-                ctr = ctr + 1;
-            }
-            else if (ctr == 2) // find better soloution
-            {
-                ctr = ctr + 1;
-                let remaining = arr.length - 2;
-                platformlist = platformlist + "+" + remaining
-            }
-        })
+    game.platforms.forEach((platform, idx, arr) => {
+        if (ctr < 2) {
+            platformlist = platformlist + platform.platform.name + ", ";
+            ctr = ctr + 1;
+        } else if (ctr == 2) {
+            // find better soloution
+            ctr = ctr + 1;
+            let remaining = arr.length - 2;
+            platformlist = platformlist + "+" + remaining;
+        }
+    });
 
+    gameItemLI.setAttribute("gameid", game.id);
     gameItemLI.className = "Game_Item";
     gameItemLI.innerHTML = `
     <img
