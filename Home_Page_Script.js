@@ -16,7 +16,6 @@ async function InitialAPICall() {
             `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=released,metacritic`
         );
         const jsontodata = await apiCall.json();
-        console.log(jsontodata);
         UpdateGameContentDisplay(jsontodata.results, true);
     } catch (error) {
         console.log(error);
@@ -29,6 +28,25 @@ Logo.addEventListener("click", () => {
     GameItemPage.style.display = "none";
 });
 
+// Creates an event listener for all genres to call the UpdateGameContentDisplayGenre() on click
+(() => {
+    let genrelist = document.querySelectorAll(
+        "#Genre_List .Sidebar_Group_Item"
+    );
+
+    genrelist.forEach((genre) => {
+        let genreText = genre.querySelector("h3").innerText;
+        genreText = genreText.toLowerCase();
+        genreText = genreText.replaceAll(" ", "");
+
+        console.log(genreText);
+
+        genre.addEventListener("click", () => {
+            UpdateGameContentDisplayGenre(genreText);
+        });
+    });
+})();
+
 // calls all the initializing functions
 (() => {
     InitialAPICall();
@@ -36,7 +54,7 @@ Logo.addEventListener("click", () => {
 
 // HELPER FUNCTIONS
 
-function UpdateGameContentDisplay(gameslist, isnew) {
+function UpdateGameContentDisplay(gameslist, isnew = true) {
     if (isnew) {
         GameContentDisplayList.innerHTML = "";
 
@@ -196,21 +214,21 @@ async function CreateGamePage(gameID) {
             </h3>
             `;
         } else {
-            let minimum = platform.requirements.minimum.split(",")
-            if (minimum.length === 1){
+            let minimum = platform.requirements.minimum.split(",");
+            if (minimum.length === 1) {
                 minimum = platform.requirements.minimum.split("\n");
             }
 
             let RequiermentList = document.createElement("ul");
             RequiermentList.className = "Requierment_List";
-            minimum.forEach(req => {
+            minimum.forEach((req) => {
                 let RequiermentItem = document.createElement("li");
                 RequiermentItem.className = "Requierment_Item";
 
                 RequiermentItem.innerHTML = req;
 
                 RequiermentList.append(RequiermentItem);
-            })
+            });
 
             platformReq.innerHTML = `
             <h3 class="System_Requierments_Title">
@@ -221,26 +239,27 @@ async function CreateGamePage(gameID) {
             platformReq.append(RequiermentList);
 
             if (platform.requirements.recommended != null) {
-                let recommended = platform.requirements.recommended.split(",")
-                if (recommended.length === 1){
+                let recommended = platform.requirements.recommended.split(",");
+                if (recommended.length === 1) {
                     recommended = platform.requirements.recommended.split("\n");
                 }
-                platformReq.innerHTML = platformReq.innerHTML + `<h4 class="Requierment_Title"> Recommended </h4>`
+                platformReq.innerHTML =
+                    platformReq.innerHTML +
+                    `<h4 class="Requierment_Title"> Recommended </h4>`;
 
                 let RequiermentList = document.createElement("ul");
                 RequiermentList.className = "Requierment_List";
-                recommended.forEach(req => {
+                recommended.forEach((req) => {
                     let RequiermentItem = document.createElement("li");
                     RequiermentItem.className = "Requierment_Item";
 
                     RequiermentItem.innerHTML = req;
 
                     RequiermentList.append(RequiermentItem);
-                })
+                });
 
                 platformReq.append(RequiermentList);
             }
-
         }
 
         GameItemSystemRequierments.append(platformReq);
@@ -335,4 +354,25 @@ async function CreateGamePage(gameID) {
 
     // adding all the html for the game page to the game item page div
     GameItemPage.append(GameItemPageContainer);
+}
+
+async function UpdateGameContentDisplayGenre(genre = "") {
+    let apiCall = await fetch(
+        `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=metacritic,released&genres=${genre}`
+    );
+    let jsontodata = await apiCall.json();
+
+    if (jsontodata.results.length == 0) {
+        apiCall = await fetch(
+            `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=metacritic,released&tags=${genre}`
+        );
+        jsontodata = await apiCall.json();
+    }
+
+    console.log(jsontodata);
+
+    UpdateGameContentDisplay(jsontodata.results, true);
+
+    GBContent.style.display = "flex";
+    GameItemPage.style.display = "none";
 }
