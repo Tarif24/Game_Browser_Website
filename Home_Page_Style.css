@@ -370,6 +370,7 @@ select option
     align-items: left;
     padding: 1rem 3rem 1rem 3rem;
     width: 40%;
+    margin-bottom: 5rem;
 }
 
 .Game_Item_Title
@@ -379,6 +380,12 @@ select option
     font-size: 5rem;
     margin-bottom: 2rem;
     line-height: 80%;
+}
+
+.About p:nth-child(3)
+{
+    display: none;
+    color: black;
 }
 
 .Rankings
@@ -416,7 +423,7 @@ select option
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    height: 450px;
+    height: 550px;
     width: 100%;
 }
 

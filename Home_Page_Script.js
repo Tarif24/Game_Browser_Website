@@ -124,6 +124,7 @@ function CreateGameItem(game) {
     return gameItemLI;
 }
 
+// Creates a unique game page for the given gameID
 async function CreateGamePage(gameID) {
     const gameDetailsJson = await fetch(
         `https://api.rawg.io/api/games/${gameID}?key=${APIKEY}`
@@ -131,6 +132,121 @@ async function CreateGamePage(gameID) {
     const gameDetails = await gameDetailsJson.json();
     console.log(gameDetails);
 
+    let platformlist = "";
+    let genrelist = "";
+    let developerlist = "";
+    let publisherlist = "";
+    let taglist = "";
+
+    // Makes a list of the platforms
+    gameDetails.platforms.forEach((platform, idx, arr) => {
+        if (idx != arr.length - 1) {
+            platformlist = platformlist + platform.platform.name + ", ";
+        } else {
+            platformlist = platformlist + platform.platform.name;
+        }
+    });
+
+    // Makes a list of the genres
+    gameDetails.genres.forEach((genre, idx, arr) => {
+        if (idx != arr.length - 1) {
+            genrelist = genrelist + genre.name + ", ";
+        } else {
+            genrelist = genrelist + genre.name;
+        }
+    });
+
+    // Makes a list of the developers
+    gameDetails.developers.forEach((developer, idx, arr) => {
+        if (idx != arr.length - 1) {
+            developerlist = developerlist + developer.name + ", ";
+        } else {
+            developerlist = developerlist + developer.name;
+        }
+    });
+
+    // Makes a list of the publishers
+    gameDetails.publishers.forEach((publisher, idx, arr) => {
+        if (idx != arr.length - 1) {
+            publisherlist = publisherlist + publisher.name + ", ";
+        } else {
+            publisherlist = publisherlist + publisher.name;
+        }
+    });
+
+    // Makes a list of the tags
+    gameDetails.tags.forEach((tag, idx, arr) => {
+        if (idx != arr.length - 1) {
+            taglist = taglist + tag.name + ", ";
+        } else {
+            taglist = taglist + tag.name;
+        }
+    });
+
+    // Makes a list of All the platforms and there requierments
+    const GameItemSystemRequierments = document.createElement("div");
+
+    gameDetails.platforms.forEach((platform, idx, arr) => {
+        let platformReq = document.createElement("div");
+
+        if (platform.requirements.minimum == null) {
+            platformReq.innerHTML = `
+            <h3 class="System_Requierments_Title">
+                System requirements for ${platform.platform.name}
+            </h3>
+            `;
+        } else {
+            let minimum = platform.requirements.minimum.split(",")
+            if (minimum.length === 1){
+                minimum = platform.requirements.minimum.split("\n");
+            }
+
+            let RequiermentList = document.createElement("ul");
+            RequiermentList.className = "Requierment_List";
+            minimum.forEach(req => {
+                let RequiermentItem = document.createElement("li");
+                RequiermentItem.className = "Requierment_Item";
+
+                RequiermentItem.innerHTML = req;
+
+                RequiermentList.append(RequiermentItem);
+            })
+
+            platformReq.innerHTML = `
+            <h3 class="System_Requierments_Title">
+            System requirements for ${platform.platform.name}
+            </h3>
+            <h4 class="Requierment_Title">Minimum</h4>
+            `;
+            platformReq.append(RequiermentList);
+
+            if (platform.requirements.recommended != null) {
+                let recommended = platform.requirements.recommended.split(",")
+                if (recommended.length === 1){
+                    recommended = platform.requirements.recommended.split("\n");
+                }
+                platformReq.innerHTML = platformReq.innerHTML + `<h4 class="Requierment_Title"> Recommended </h4>`
+
+                let RequiermentList = document.createElement("ul");
+                RequiermentList.className = "Requierment_List";
+                recommended.forEach(req => {
+                    let RequiermentItem = document.createElement("li");
+                    RequiermentItem.className = "Requierment_Item";
+
+                    RequiermentItem.innerHTML = req;
+
+                    RequiermentList.append(RequiermentItem);
+                })
+
+                platformReq.append(RequiermentList);
+            }
+
+        }
+
+        GameItemSystemRequierments.append(platformReq);
+    });
+
+    // HTML for the game page here it will get populated with the game details from above
     GameItemPage.innerHTML = "";
 
     const GameItemPageContainer = document.createElement("div");
@@ -138,27 +254,16 @@ async function CreateGamePage(gameID) {
 
     GameItemPageContainer.innerHTML = `
     <div class="Background_Art" style="background-image: linear-gradient(to bottom, rgba(15,15,15,0), rgb(21,21,21)),linear-gradient(to bottom, rgba(21,21,21,0.8), rgba(21,21,21,0.5)),url('${gameDetails.background_image}');"></div>
-    <h1 class="Game_Item_Title">Hollow Knight: Silksong</h1>
+    <h1 class="Game_Item_Title">${gameDetails.name}</h1>
     <div class="Rankings">
-        <h3 class="Ranking_Item Genre_Ranking">
-            Platformer: #100
-        </h3>
-        <h3 class="Ranking_Item Year_Ranking">
-            Top 2024: #100
+        <h3 class="Ranking_Item">
+            Achievements count: ${gameDetails.achievements_count}
         </h3>
     </div>
     <div class="Description">
         <div class="About">
             <h3 class="About_Title">About</h3>
-            <p class="About_Text">
-                Hollow Knight: Silksong is the epic sequel
-                to Hollow Knight, the epic action-adventure
-                of bugs and heroes. As the lethal hunter
-                Hornet, journey to all-new lands, discover
-                new powers, battle vast hordes of bugs and
-                beasts and uncover ancient secrets tied to
-                your nature and your past.
-            </p>
+            ${gameDetails.description}
         </div>
         <div class="Game_Item_Meta">
             <div class="Game_Item_Meta_Block">
@@ -166,7 +271,7 @@ async function CreateGamePage(gameID) {
                     Platforms
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    Linux, PC, macOS, Nintendo Switch
+                    ${platformlist}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
@@ -174,21 +279,21 @@ async function CreateGamePage(gameID) {
                     Genre
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    Action, Adventure, Indie, Platformer
+                    ${genrelist}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
                 <div class="Game_Item_Meta_Title">
                     Release date
                 </div>
-                <div class="Game_Item_Meta_Text">TBA</div>
+                <div class="Game_Item_Meta_Text">${gameDetails.released}</div>
             </div>
             <div class="Game_Item_Meta_Block">
                 <div class="Game_Item_Meta_Title">
                     Developer
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    Team Cherry
+                    ${developerlist}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
@@ -196,7 +301,7 @@ async function CreateGamePage(gameID) {
                     Publisher
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    Team Cherry
+                    ${publisherlist}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
@@ -204,18 +309,13 @@ async function CreateGamePage(gameID) {
                     Age rating
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    Not rated
+                    ${gameDetails.esrb_rating.name}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block_Wide">
                 <div class="Game_Item_Meta_Title">Tags</div>
                 <div class="Game_Item_Meta_Text">
-                    Singleplayer, Full controller support,
-                    Great Soundtrack, Story Rich, 2D,
-                    Difficult, Exploration,
-                    Action-Adventure, Dark Fantasy, Side
-                    Scroller, Metroidvania, Hand-drawn,
-                    Gothic
+                    ${taglist}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block_Wide">
@@ -223,86 +323,16 @@ async function CreateGamePage(gameID) {
                     Website
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    http://hollowknightsilksong.com/
+                    ${gameDetails.website}
                 </div>
             </div>
         </div>
         <div class="Game_Item_System_Requierments">
-            <div class="Linux">
-                <h3 class="System_Requierments_Title">
-                    System requirements for Linux
-                </h3>
-            </div>
-            <div class="PC">
-                <h3 class="System_Requierments_Title">
-                    System requirements for PC
-                </h3>
-                <h4 class="Requierment_Title">Minimum</h4>
-                <ul class="Requierment_List">
-                    <li class="Requierment_Item">
-                        OS: Windows 7
-                    </li>
-                    <li class="Requierment_Item">
-                        Processor: Intel Core 2 Duo E5200
-                    </li>
-                    <li class="Requierment_Item">
-                        Memory: 4 GB RAM
-                    </li>
-                    <li class="Requierment_Item">
-                        Graphics: GeForce 9800GTX+ (1GB)
-                    </li>
-                    <li class="Requierment_Item">
-                        DirectX: Version 10
-                    </li>
-                    <li class="Requierment_Item">
-                        Storage: 9 GB available space
-                    </li>
-                    <li class="Requierment_Item">
-                        Additional Notes: 1080p, 16:9
-                        recommended
-                    </li>
-                </ul>
-                <h4 class="Requierment_Title">
-                    Recommended
-                </h4>
-                <ul class="Requierment_List">
-                    <li class="Requierment_Item">
-                        OS: Windows 10
-                    </li>
-                    <li class="Requierment_Item">
-                        Processor: Intel Core i5
-                    </li>
-                    <li class="Requierment_Item">
-                        Memory: 8 GB RAM
-                    </li>
-                    <li class="Requierment_Item">
-                        Graphics: GeForce GTX 560+
-                    </li>
-                    <li class="Requierment_Item">
-                        DirectX: Version 10
-                    </li>
-                    <li class="Requierment_Item">
-                        Storage: 9 GB available space
-                    </li>
-                    <li class="Requierment_Item">
-                        Additional Notes: 1080p, 16:9
-                        recommended
-                    </li>
-                </ul>
-            </div>
-            <div class="MacOS">
-                <h3 class="System_Requierments_Title">
-                    System requirements for MacOS
-                </h3>
-            </div>
-            <div class="Nintendo">
-                <h3 class="System_Requierments_Title">
-                    System requirements for Nintendos
-                </h3>
-            </div>
+            ${GameItemSystemRequierments.innerHTML}
         </div>
     </div>
     `;
 
+    // adding all the html for the game page to the game item page div
     GameItemPage.append(GameItemPageContainer);
 }
