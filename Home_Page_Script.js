@@ -4,6 +4,7 @@ const HOMEQUERY = `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=
 
 // Html elements
 const Logo = document.querySelector("#Logo");
+const SearchInput = document.querySelector("#GB_Header form");
 const GBContent = document.querySelector("#GB_Content");
 const GameItemPage = document.querySelector("#Game_Item_Page");
 const GameContentDisplayList = document.querySelector("#GB_Content_Display_List");
@@ -17,6 +18,28 @@ function InitialAPICall() {
 // Initial Event listeners
 Logo.addEventListener("click", () => {
     UpdateGameContentDisplayHome();
+});
+
+SearchInput.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    let input = document.querySelector("#Search_Input");
+
+    if (input.value.trim() === ""){
+        return;
+    }
+
+    try {
+        const apiCall = await fetch(`https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=released,metacritic&search=${input.value.trim()}`);
+        const jsontodata = await apiCall.json();
+        UpdateGameContentDisplay(jsontodata.results, true);
+    } catch (error) {
+        console.log(error);
+    }
+    GameContentTitle.innerText = `Search Result For: ${input.value.trim()}`;
+    GBContent.style.display = "flex";
+    GameItemPage.style.display = "none";
+
+    input.value = "";
 });
 
 document.querySelector("#Sidebar #Home").addEventListener("click", () => {
@@ -363,7 +386,7 @@ async function CreateGamePage(gameID) {
     GameItemPage.append(GameItemPageContainer);
 }
 
-async function UpdateGameContentDisplayGenre(genre = "", genreTextUnchanged = "") {
+async function UpdateGameContentDisplayGenre(genre = "", title = "") {
     let apiCall = await fetch(
         `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=metacritic,released&genres=${genre}`
     );
@@ -376,7 +399,7 @@ async function UpdateGameContentDisplayGenre(genre = "", genreTextUnchanged = ""
         jsontodata = await apiCall.json();
     }
 
-    GameContentTitle.innerText = genreTextUnchanged;
+    GameContentTitle.innerText = title;
 
     UpdateGameContentDisplay(jsontodata.results, true);
 
