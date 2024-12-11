@@ -1,5 +1,6 @@
 // API Variables
 const APIKEY = "c893cee9cd204b15a38f977a32547d08";
+const HOMEQUERY = `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=released,metacritic`;
 
 // Html elements
 const Logo = document.querySelector("#Logo");
@@ -12,9 +13,7 @@ const GameContentDisplayList = document.querySelector(
 // INITILIZING
 async function InitialAPICall() {
     try {
-        const apiCall = await fetch(
-            `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=released,metacritic`
-        );
+        const apiCall = await fetch(HOMEQUERY);
         const jsontodata = await apiCall.json();
         console.log(jsontodata);
         UpdateGameContentDisplay(jsontodata.results, true);
@@ -24,7 +23,30 @@ async function InitialAPICall() {
 }
 
 // Initial Event listeners
-Logo.addEventListener("click", () => {
+Logo.addEventListener("click", async () => {
+    try {
+        const apiCall = await fetch(HOMEQUERY);
+        const jsontodata = await apiCall.json();
+        console.log(jsontodata);
+        UpdateGameContentDisplay(jsontodata.results, true);
+    } catch (error) {
+        console.log(error);
+    }
+
+    GBContent.style.display = "flex";
+    GameItemPage.style.display = "none";
+});
+
+document.querySelector("#Sidebar #Home").addEventListener("click", async () => {
+    try {
+        const apiCall = await fetch(HOMEQUERY);
+        const jsontodata = await apiCall.json();
+        console.log(jsontodata);
+        UpdateGameContentDisplay(jsontodata.results, true);
+    } catch (error) {
+        console.log(error);
+    }
+
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";
 });

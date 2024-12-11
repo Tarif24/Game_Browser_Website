@@ -134,7 +134,7 @@ html
     flex-direction: column;
     justify-content: top;
     align-items: left;
-    gap: 2rem;
+    gap: 1rem;
     padding-left: 50px;
     padding-top: 50px;
 }
@@ -147,6 +147,28 @@ html
     letter-spacing: 2px;
     font-size: 2rem;
     font-weight: 500;
+}
+
+#Sidebar .Title_Hover
+{
+    transition: all 0.2s ease-in-out;
+}
+
+#Sidebar .Title_Hover h2
+{
+    transition: all 0.2s ease-in-out;
+}
+
+#Sidebar .Title_Hover:hover
+{
+    cursor: pointer;
+    color: rgb(114, 114, 114);
+}
+
+#Sidebar .Title_Hover h2:hover
+{
+    cursor: pointer;
+    color: rgb(114, 114, 114);
 }
 
 .Sidebar_Group ul li
