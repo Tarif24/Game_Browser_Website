@@ -20,6 +20,7 @@ Logo.addEventListener("click", () => {
     UpdateGameContentDisplayHome();
 });
 
+// Searchbar functionality
 SearchInput.addEventListener("submit", async (event) => {
     event.preventDefault();
     let input = document.querySelector("#Search_Input");
@@ -95,6 +96,9 @@ function UpdateGameContentDisplay(gameslist, isnew = true) {
             GameContentDisplayList.append(CreateGameItem(game));
         });
     }
+
+    GBContent.style.display = "flex";
+    GameItemPage.style.display = "none";
 }
 
 function CreateGameItem(game) {
@@ -106,7 +110,11 @@ function CreateGameItem(game) {
 
     game.genres.forEach((genre, idx, arr) => {
         if (ctr < 3) {
-            genrelist = genrelist + genre.name + ", ";
+            if (idx != arr.length - 1) {
+                genrelist = genrelist + genre.name + ", ";
+            } else {
+                genrelist = genrelist + genre.name;
+            }
             ctr = ctr + 1;
         } else if (ctr == 3) {
             // find better soloution
@@ -120,7 +128,11 @@ function CreateGameItem(game) {
 
     game.platforms.forEach((platform, idx, arr) => {
         if (ctr < 2) {
-            platformlist = platformlist + platform.platform.name + ", ";
+            if (idx != arr.length - 1) {
+                platformlist = platformlist + platform.platform.name + ", ";
+            } else {
+                platformlist = platformlist + platform.platform.name;
+            }
             ctr = ctr + 1;
         } else if (ctr == 2) {
             // find better soloution
@@ -145,7 +157,7 @@ function CreateGameItem(game) {
             </p>
 
             <p class="Game_Metacritic">
-                ${game.metacritic}
+                ${game.metacritic != null ? game.metacritic : "N/A"}
             </p>
         </div>
         <p class="Game_Title">
