@@ -6,49 +6,21 @@ const HOMEQUERY = `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=
 const Logo = document.querySelector("#Logo");
 const GBContent = document.querySelector("#GB_Content");
 const GameItemPage = document.querySelector("#Game_Item_Page");
-const GameContentDisplayList = document.querySelector(
-    "#GB_Content_Display_List"
-);
+const GameContentDisplayList = document.querySelector("#GB_Content_Display_List");
+const GameContentTitle = document.querySelector("#GB_Content_Title");
 
 // INITILIZING
-async function InitialAPICall() {
-    try {
-        const apiCall = await fetch(HOMEQUERY);
-        const jsontodata = await apiCall.json();
-        console.log(jsontodata);
-        UpdateGameContentDisplay(jsontodata.results, true);
-    } catch (error) {
-        console.log(error);
-    }
+function InitialAPICall() {
+    UpdateGameContentDisplayHome();
 }
 
 // Initial Event listeners
-Logo.addEventListener("click", async () => {
-    try {
-        const apiCall = await fetch(HOMEQUERY);
-        const jsontodata = await apiCall.json();
-        console.log(jsontodata);
-        UpdateGameContentDisplay(jsontodata.results, true);
-    } catch (error) {
-        console.log(error);
-    }
-
-    GBContent.style.display = "flex";
-    GameItemPage.style.display = "none";
+Logo.addEventListener("click", () => {
+    UpdateGameContentDisplayHome();
 });
 
-document.querySelector("#Sidebar #Home").addEventListener("click", async () => {
-    try {
-        const apiCall = await fetch(HOMEQUERY);
-        const jsontodata = await apiCall.json();
-        console.log(jsontodata);
-        UpdateGameContentDisplay(jsontodata.results, true);
-    } catch (error) {
-        console.log(error);
-    }
-
-    GBContent.style.display = "flex";
-    GameItemPage.style.display = "none";
+document.querySelector("#Sidebar #Home").addEventListener("click", () => {
+    UpdateGameContentDisplayHome();
 });
 
 // Creates an event listener for all genres to call the UpdateGameContentDisplayGenre() on click
@@ -63,7 +35,7 @@ document.querySelector("#Sidebar #Home").addEventListener("click", async () => {
         genreText = genreText.replaceAll(" ", "");
 
         genre.addEventListener("click", () => {
-            UpdateGameContentDisplayGenre(genreText);
+            UpdateGameContentDisplayGenre(genreText, genre.querySelector("h3").innerText);
         });
     });
 })();
@@ -74,6 +46,19 @@ document.querySelector("#Sidebar #Home").addEventListener("click", async () => {
 })();
 
 // HELPER FUNCTIONS
+
+async function UpdateGameContentDisplayHome(){
+    try {
+        const apiCall = await fetch(HOMEQUERY);
+        const jsontodata = await apiCall.json();
+        UpdateGameContentDisplay(jsontodata.results, true);
+    } catch (error) {
+        console.log(error);
+    }
+    GameContentTitle.innerText = "Best Games";
+    GBContent.style.display = "flex";
+    GameItemPage.style.display = "none";
+}
 
 function UpdateGameContentDisplay(gameslist, isnew = true) {
     if (isnew) {
@@ -378,7 +363,7 @@ async function CreateGamePage(gameID) {
     GameItemPage.append(GameItemPageContainer);
 }
 
-async function UpdateGameContentDisplayGenre(genre = "") {
+async function UpdateGameContentDisplayGenre(genre = "", genreTextUnchanged = "") {
     let apiCall = await fetch(
         `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=metacritic,released&genres=${genre}`
     );
@@ -391,7 +376,7 @@ async function UpdateGameContentDisplayGenre(genre = "") {
         jsontodata = await apiCall.json();
     }
 
-    console.log(jsontodata);
+    GameContentTitle.innerText = genreTextUnchanged;
 
     UpdateGameContentDisplay(jsontodata.results, true);
 
