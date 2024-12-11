@@ -16,6 +16,7 @@ async function InitialAPICall() {
             `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=released,metacritic`
         );
         const jsontodata = await apiCall.json();
+        console.log(jsontodata);
         UpdateGameContentDisplay(jsontodata.results, true);
     } catch (error) {
         console.log(error);
@@ -38,8 +39,6 @@ Logo.addEventListener("click", () => {
         let genreText = genre.querySelector("h3").innerText;
         genreText = genreText.toLowerCase();
         genreText = genreText.replaceAll(" ", "");
-
-        console.log(genreText);
 
         genre.addEventListener("click", () => {
             UpdateGameContentDisplayGenre(genreText);
@@ -134,6 +133,7 @@ function CreateGameItem(game) {
     `;
 
     gameItemLI.addEventListener("click", () => {
+        window.scrollTo(0, 0, "instant");
         CreateGamePage(game.id);
         GBContent.style.display = "none";
         GameItemPage.style.display = "flex";
@@ -328,7 +328,7 @@ async function CreateGamePage(gameID) {
                     Age rating
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    ${gameDetails.esrb_rating.name}
+                    ${gameDetails.esrb_rating != null ? gameDetails.esrb_rating.name : "N/A"}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block_Wide">
