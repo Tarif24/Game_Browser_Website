@@ -9,8 +9,18 @@ const GBContent = document.querySelector("#GB_Content");
 const GameItemPage = document.querySelector("#Game_Item_Page");
 const GameContentDisplayList = document.querySelector("#GB_Content_Display_List");
 const GameContentTitle = document.querySelector("#GB_Content_Title");
+const PlatformFilter = document.querySelector("#Platform_Filter");
+
+let allPlatforms = new Map();
 
 // INITILIZING
+
+// calls all the initializing functions
+(() => {
+    InitialAPICall();
+    LoadAllPlatforms();
+})();
+
 function InitialAPICall() {
     UpdateGameContentDisplayHome();
 }
@@ -64,12 +74,19 @@ document.querySelector("#Sidebar #Home").addEventListener("click", () => {
     });
 })();
 
-// calls all the initializing functions
-(() => {
-    InitialAPICall();
-})();
-
 // HELPER FUNCTIONS
+
+async function LoadAllPlatforms() {
+    const apiCall = await fetch(`https://api.rawg.io/api/platforms?key=${APIKEY}`);
+    const jsontodata = await apiCall.json();
+    
+    for (let i = 0; i < jsontodata.results.length - 28; i++)
+    {
+        allPlatforms.set(jsontodata.results[i].name, jsontodata.results[i].id);
+
+        PlatformFilter.innerHTML = PlatformFilter.innerHTML + `<option value="${jsontodata.results[i].name}">${jsontodata.results[i].name}</option>`
+    }
+}
 
 async function UpdateGameContentDisplayHome(){
     try {
