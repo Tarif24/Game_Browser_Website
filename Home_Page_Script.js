@@ -1,6 +1,8 @@
 // API Variables
 const APIKEY = "c893cee9cd204b15a38f977a32547d08";
-const HOMEQUERY = `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=released,metacritic`;
+const HOMEQUERY = `https://api.rawg.io/api/games?key=${APIKEY}&page_size=32&page=1&ordering=released,metacritic`;
+
+let savedParams = [];
 
 // Html elements
 const Logo = document.querySelector("#Logo");
@@ -16,9 +18,18 @@ let allPlatforms = new Map();
 // INITILIZING
 
 // calls all the initializing functions
-(() => {
+(async () => {
+    await LoadAllPlatforms();
+
+    savedParams.push("1");
+    savedParams.push("released,metacritic");
+    savedParams.push(String(allPlatforms.get(PlatformFilter.value)));
+
     InitialAPICall();
-    LoadAllPlatforms();
+
+    ConstructQuery("", "", "");
+    ConstructQuery("2", "metacritic", "5");
+    ConstructQuery("", "", "-");
 })();
 
 function InitialAPICall() {
@@ -75,6 +86,28 @@ document.querySelector("#Sidebar #Home").addEventListener("click", () => {
 })();
 
 // HELPER FUNCTIONS
+
+function ConstructQuery(page = "-", ordering = "-", platforms = "-"){
+    let params = [page, ordering, platforms];
+    let names = ["&page=", "&ordering=", "&platforms="];
+
+    let query = `https://api.rawg.io/api/games?key=${APIKEY}&page_size=32`;
+
+    params.forEach((param, idx) => {
+        if (param == "") {
+            param = savedParams[idx];
+        }
+        else if (param != "-") {
+            savedParams[idx] = param;
+        }
+
+        if (param != "-") {
+            query = query + names[idx] + param;
+        }
+    })
+
+    return query;
+}
 
 async function LoadAllPlatforms() {
     const apiCall = await fetch(`https://api.rawg.io/api/platforms?key=${APIKEY}`);
