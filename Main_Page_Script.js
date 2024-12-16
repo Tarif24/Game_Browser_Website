@@ -495,7 +495,7 @@ async function CreateGamePage(gameID) {
                     Platforms
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    ${platformlist}
+                    ${platformlist != "" ? platformlist : "N/A"}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
@@ -503,7 +503,7 @@ async function CreateGamePage(gameID) {
                     Genre
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    ${genrelist}
+                    ${genrelist != "" ? genrelist : "N/A"}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
@@ -517,7 +517,7 @@ async function CreateGamePage(gameID) {
                     Developer
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    ${developerlist}
+                    ${developerlist != "" ? developerlist : "N/A"}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
@@ -525,7 +525,7 @@ async function CreateGamePage(gameID) {
                     Publisher
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    ${publisherlist}
+                    ${publisherlist != "" ? publisherlist : "N/A"}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block">
@@ -543,7 +543,7 @@ async function CreateGamePage(gameID) {
             <div class="Game_Item_Meta_Block_Wide">
                 <div class="Game_Item_Meta_Title">Tags</div>
                 <div class="Game_Item_Meta_Text">
-                    ${taglist}
+                    ${taglist != "" ? taglist : "N/A"}
                 </div>
             </div>
             <div class="Game_Item_Meta_Block_Wide">
@@ -551,7 +551,7 @@ async function CreateGamePage(gameID) {
                     Website
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    ${gameDetails.website}
+                    ${gameDetails.website != "" ? gameDetails.website : "N/A"}
                 </div>
             </div>
         </div>
