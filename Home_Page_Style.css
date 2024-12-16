@@ -362,6 +362,28 @@ select option
     font-size: 0.7rem;
 }
 
+#Show_More
+{
+    align-self: center;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    font-size: 2rem;
+    border: white 0.1rem solid;
+    border-radius: 2rem;
+    padding: 1rem;
+    font-weight: 400;
+    font-family: "kanit";
+    transition: all 0.2s ease-in-out;
+}
+
+#Show_More:hover
+{
+    cursor: pointer;
+    background: white;
+    color: black;
+}
+
 /* Game Item Page */
 
 #Game_Item_Page

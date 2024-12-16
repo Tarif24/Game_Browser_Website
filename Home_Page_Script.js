@@ -85,6 +85,7 @@ document.querySelector("#Sidebar #Home").addEventListener("click", () => {
     UpdateGameContentDisplayHome();
 });
 
+// Changes the order of items displayed based on the order filter
 document.querySelector("#Order_Filter").addEventListener("change", async () => {
     try {
         const apiCall = await fetch(
@@ -97,6 +98,7 @@ document.querySelector("#Order_Filter").addEventListener("change", async () => {
     }
 });
 
+// Changes the order of items displayed based on the platfrom filter
 document.querySelector("#Platform_Filter").addEventListener("change", async () => {
     try {
         const apiCall = await fetch(
@@ -104,6 +106,21 @@ document.querySelector("#Platform_Filter").addEventListener("change", async () =
         );
         const jsontodata = await apiCall.json();
         UpdateGameContentDisplay(jsontodata.results, true);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+document.querySelector("#Show_More").addEventListener("click", async () => {
+    let pageNum = Number(savedParams[savedParamsName.get("page")].value) + 1;
+    console.log(pageNum);
+    try {
+        const apiCall = await fetch(
+            ConstructQuery(pageNum)
+        );
+        const jsontodata = await apiCall.json();
+        UpdateGameContentDisplay(jsontodata.results, false);
+        console.log(ConstructQuery(pageNum));
     } catch (error) {
         console.log(error);
     }
@@ -177,7 +194,7 @@ function ConstructQuery(
     params.forEach((param, idx) => {
         if (param == "") {
             param = savedParams[idx].value;
-        } else if (param != "-") {
+        } else if (param != "-" && idx != savedParamsName.get("page")) {
             savedParams[idx].value = param;
         }
 
