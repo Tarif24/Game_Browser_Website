@@ -564,7 +564,7 @@ async function UpdateGameContentDisplayGenre(genre = "", title = "") {
         jsontodata = await apiCall.json();
     }
 
-    GameContentTitle.innerText = title;
+    GameContentTitle.innerText = title + " Games";
 
     UpdateGameContentDisplay(jsontodata.results, true);
 
