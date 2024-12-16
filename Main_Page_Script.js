@@ -308,7 +308,7 @@ function CreateGameItem(game) {
     gameItemLI.innerHTML = `
     <img
         class="Game_Image"
-        src="${game.background_image}"
+        src="${game.background_image != null? game.background_image : "assets/no-image-icon.svg"}"
         alt="Game Image"
     />
     <div class="Game_Info">
