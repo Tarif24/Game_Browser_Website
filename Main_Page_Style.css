@@ -213,8 +213,6 @@ html
     fill: rgb(24, 24, 24);
 }
 
-
-
 /* Game Browser Content */
 
 #GB_Content
@@ -416,6 +414,24 @@ select option
     padding: 1rem 3rem 1rem 3rem;
     width: 40%;
     margin-bottom: 5rem;
+}
+
+.Back
+{
+    position: absolute;
+    border: white 0.1rem solid;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 2rem;
+    right: 100px;
+    transition: all 0.2s ease-in-out;
+}
+
+.Back:hover
+{
+    cursor: pointer;
+    background: white;
+    color: black;
 }
 
 .Game_Item_Title

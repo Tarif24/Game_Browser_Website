@@ -351,7 +351,6 @@ async function CreateGamePage(gameID) {
         `https://api.rawg.io/api/games/${gameID}?key=${APIKEY}`
     );
     const gameDetails = await gameDetailsJson.json();
-    console.log(gameDetails);
 
     let platformlist = "";
     let genrelist = "";
@@ -478,6 +477,9 @@ async function CreateGamePage(gameID) {
     <div class="Background_Art" style="background-image: linear-gradient(to bottom, rgba(15,15,15,0), rgb(21,21,21)),linear-gradient(to bottom, rgba(21,21,21,0.8), rgba(21,21,21,0.5)),url('${
         gameDetails.background_image
     }');"></div>
+    <div class="Back_Container">
+        <h2 class="Back">Back</h1>
+    </div>
     <h1 class="Game_Item_Title">${gameDetails.name}</h1>
     <div class="Rankings">
         <h3 class="Ranking_Item">
@@ -563,6 +565,11 @@ async function CreateGamePage(gameID) {
 
     // adding all the html for the game page to the game item page div
     GameItemPage.append(GameItemPageContainer);
+
+    document.querySelector(".Back").addEventListener("click", () => {
+        GBContent.style.display = "flex";
+        GameItemPage.style.display = "none";
+    });
 }
 
 async function UpdateGameContentDisplayGenre(genre = "", title = "") {
