@@ -15,6 +15,7 @@ const GameContentDisplayList = document.querySelector(
 );
 const GameContentTitle = document.querySelector("#GB_Content_Title");
 const PlatformFilter = document.querySelector("#Platform_Filter");
+const OrderFilter = document.querySelector("#Order_Filter");
 
 let allPlatforms = new Map();
 
@@ -56,7 +57,7 @@ SearchInput.addEventListener("submit", async (event) => {
             ConstructQuery(
                 "1",
                 "released,metacritic",
-                "-",
+                "",
                 "-",
                 "-",
                 input.value.trim()
@@ -72,11 +73,28 @@ SearchInput.addEventListener("submit", async (event) => {
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";
 
+    OrderFilter.selectedIndex = 0;
+    PlatformFilter.selectedIndex = 0;
+    savedParams[savedParamsName.get("platforms")].value = "4";
+    savedParams[savedParamsName.get("ordering")].value = "released,metacritic";
+
     input.value = "";
 });
 
 document.querySelector("#Sidebar #Home").addEventListener("click", () => {
     UpdateGameContentDisplayHome();
+});
+
+document.querySelector("#Order_Filter").addEventListener("change", async () => {
+    try {
+        const apiCall = await fetch(
+            ConstructQuery("", OrderFilter.value, "")
+        );
+        const jsontodata = await apiCall.json();
+        UpdateGameContentDisplay(jsontodata.results, true);
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 document.querySelector("#Platform_Filter").addEventListener("change", async () => {
@@ -193,7 +211,7 @@ async function UpdateGameContentDisplayHome() {
 
     try {
         const apiCall = await fetch(
-            ConstructQuery("1", "released,metacritic", "-")
+            ConstructQuery("1", "released,metacritic", "")
         );
         const jsontodata = await apiCall.json();
         UpdateGameContentDisplay(jsontodata.results, true);
@@ -203,6 +221,11 @@ async function UpdateGameContentDisplayHome() {
     GameContentTitle.innerText = "Best Games";
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";
+    
+    OrderFilter.selectedIndex = 0;
+    PlatformFilter.selectedIndex = 0;
+    savedParams[savedParamsName.get("platforms")].value = "4";
+    savedParams[savedParamsName.get("ordering")].value = "released,metacritic";
 }
 
 function UpdateGameContentDisplay(gameslist, isnew = true) {
@@ -530,20 +553,25 @@ async function UpdateGameContentDisplayGenre(genre = "", title = "") {
     savedParams[savedParamsName.get("genres")].isActive = true;
     savedParams[savedParamsName.get("search")].isActive = false;
 
-    let apiCall = await fetch(ConstructQuery("1", "metacritic,released", "-", "", genre));
+    let apiCall = await fetch(ConstructQuery("1", "metacritic,released", "", "", genre));
     let jsontodata = await apiCall.json();
 
     if (jsontodata.results.length == 0) {
         savedParams[savedParamsName.get("tags")].isActive = true;
         savedParams[savedParamsName.get("genres")].isActive = false;
 
-        apiCall = await fetch(ConstructQuery("1", "metacritic,released", "-", genre));
+        apiCall = await fetch(ConstructQuery("1", "metacritic,released", "", genre));
         jsontodata = await apiCall.json();
     }
 
     GameContentTitle.innerText = title;
 
     UpdateGameContentDisplay(jsontodata.results, true);
+
+    OrderFilter.selectedIndex = 0;
+    PlatformFilter.selectedIndex = 0;
+    savedParams[savedParamsName.get("platforms")].value = "4";
+    savedParams[savedParamsName.get("ordering")].value = "released,metacritic";
 
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";
