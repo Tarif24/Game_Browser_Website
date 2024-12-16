@@ -1,13 +1,10 @@
 // API Variables
 const APIKEY = "c893cee9cd204b15a38f977a32547d08";
-const HOMEQUERY = `https://api.rawg.io/api/games?key=${APIKEY}&page_size=32&page=1&ordering=released,metacritic`;
 
 let savedParams = [];
 let savedParamsName = new Map();
 
 // Html elements
-const Logo = document.querySelector("#Logo");
-const SearchInput = document.querySelector("#GB_Header form");
 const GBContent = document.querySelector("#GB_Content");
 const GameItemPage = document.querySelector("#Game_Item_Page");
 const GameContentDisplayList = document.querySelector(
@@ -35,12 +32,12 @@ function InitialAPICall() {
 }
 
 // Initial Event listeners
-Logo.addEventListener("click", () => {
+document.querySelector("#Logo").addEventListener("click", () => {
     UpdateGameContentDisplayHome();
 });
 
 // Searchbar functionality
-SearchInput.addEventListener("submit", async (event) => {
+document.querySelector("#GB_Header form").addEventListener("submit", async (event) => {
     event.preventDefault();
     let input = document.querySelector("#Search_Input");
 
@@ -120,9 +117,9 @@ document.querySelector("#Show_More").addEventListener("click", async () => {
         );
         const jsontodata = await apiCall.json();
         UpdateGameContentDisplay(jsontodata.results, false);
-        console.log(ConstructQuery(pageNum));
     } catch (error) {
         console.log(error);
+        document.querySelector("#Show_More").style.display = "none";
     }
 });
 
@@ -260,6 +257,7 @@ function UpdateGameContentDisplay(gameslist, isnew = true) {
 
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";
+    document.querySelector("#Show_More").style.display = "flex";
 }
 
 function CreateGameItem(game) {
