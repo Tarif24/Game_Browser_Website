@@ -329,7 +329,7 @@ function CreateGameItem(game) {
                 Genre: ${genrelist}
             </p>
             <p class="Game_Release">
-                Release: ${game.released}
+                Release: ${game.released != null ? game.released : "0000-00-00"}
             </p>
         </div>
     </div>
@@ -510,7 +510,7 @@ async function CreateGamePage(gameID) {
                 <div class="Game_Item_Meta_Title">
                     Release date
                 </div>
-                <div class="Game_Item_Meta_Text">${gameDetails.released}</div>
+                <div class="Game_Item_Meta_Text">${gameDetails.released != null ? gameDetails.released : "0000-00-00"}</div>
             </div>
             <div class="Game_Item_Meta_Block">
                 <div class="Game_Item_Meta_Title">
