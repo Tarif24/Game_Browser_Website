@@ -3,13 +3,16 @@ const APIKEY = "c893cee9cd204b15a38f977a32547d08";
 const HOMEQUERY = `https://api.rawg.io/api/games?key=${APIKEY}&page_size=32&page=1&ordering=released,metacritic`;
 
 let savedParams = [];
+let savedParamsName = new Map();
 
 // Html elements
 const Logo = document.querySelector("#Logo");
 const SearchInput = document.querySelector("#GB_Header form");
 const GBContent = document.querySelector("#GB_Content");
 const GameItemPage = document.querySelector("#Game_Item_Page");
-const GameContentDisplayList = document.querySelector("#GB_Content_Display_List");
+const GameContentDisplayList = document.querySelector(
+    "#GB_Content_Display_List"
+);
 const GameContentTitle = document.querySelector("#GB_Content_Title");
 const PlatformFilter = document.querySelector("#Platform_Filter");
 
@@ -21,15 +24,9 @@ let allPlatforms = new Map();
 (async () => {
     await LoadAllPlatforms();
 
-    savedParams.push("1");
-    savedParams.push("released,metacritic");
-    savedParams.push(String(allPlatforms.get(PlatformFilter.value)));
+    InitilizeQueryParams();
 
     InitialAPICall();
-
-    ConstructQuery("", "", "");
-    ConstructQuery("2", "metacritic", "5");
-    ConstructQuery("", "", "-");
 })();
 
 function InitialAPICall() {
@@ -46,12 +43,26 @@ SearchInput.addEventListener("submit", async (event) => {
     event.preventDefault();
     let input = document.querySelector("#Search_Input");
 
-    if (input.value.trim() === ""){
+    if (input.value.trim() === "") {
         return;
     }
 
     try {
-        const apiCall = await fetch(`https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=released,metacritic&search=${input.value.trim()}`);
+        savedParams[savedParamsName.get("tags")].isActive = false;
+        savedParams[savedParamsName.get("genres")].isActive = false;
+        savedParams[savedParamsName.get("search")].isActive = true;
+
+        const apiCall = await fetch(
+            ConstructQuery(
+                "1",
+                "released,metacritic",
+                "-",
+                "-",
+                "-",
+                input.value.trim()
+            )
+        );
+
         const jsontodata = await apiCall.json();
         UpdateGameContentDisplay(jsontodata.results, true);
     } catch (error) {
@@ -68,6 +79,18 @@ document.querySelector("#Sidebar #Home").addEventListener("click", () => {
     UpdateGameContentDisplayHome();
 });
 
+document.querySelector("#Platform_Filter").addEventListener("change", async () => {
+    try {
+        const apiCall = await fetch(
+            ConstructQuery("", "", String(allPlatforms.get(PlatformFilter.value)))
+        );
+        const jsontodata = await apiCall.json();
+        UpdateGameContentDisplay(jsontodata.results, true);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 // Creates an event listener for all genres to call the UpdateGameContentDisplayGenre() on click
 (() => {
     let genrelist = document.querySelectorAll(
@@ -80,50 +103,98 @@ document.querySelector("#Sidebar #Home").addEventListener("click", () => {
         genreText = genreText.replaceAll(" ", "");
 
         genre.addEventListener("click", () => {
-            UpdateGameContentDisplayGenre(genreText, genre.querySelector("h3").innerText);
+            UpdateGameContentDisplayGenre(
+                genreText,
+                genre.querySelector("h3").innerText
+            );
         });
     });
 })();
 
 // HELPER FUNCTIONS
 
-function ConstructQuery(page = "-", ordering = "-", platforms = "-"){
-    let params = [page, ordering, platforms];
-    let names = ["&page=", "&ordering=", "&platforms="];
+function InitilizeQueryParams() {
+    savedParamsName.set("page", 0);
+    savedParamsName.set("ordering", 1);
+    savedParamsName.set("platforms", 2);
+    savedParamsName.set("tags", 3);
+    savedParamsName.set("genres", 4);
+    savedParamsName.set("search", 5);
+
+    savedParams.push({ value: "1", isActive: true });
+    savedParams.push({ value: "released,metacritic", isActive: true });
+    savedParams.push({
+        value: String(allPlatforms.get(PlatformFilter.value)),
+        isActive: true,
+    });
+    savedParams.push({ value: "", isActive: false });
+    savedParams.push({ value: "", isActive: false });
+    savedParams.push({ value: "", isActive: false });
+
+    savedParams[savedParamsName.get("tags")].isActive = false;
+    savedParams[savedParamsName.get("genres")].isActive = false;
+    savedParams[savedParamsName.get("search")].isActive = false;
+}
+
+function ConstructQuery(
+    page = "",
+    ordering = "",
+    platforms = "",
+    tags = "",
+    genres = "",
+    search = ""
+) {
+    let params = [page, ordering, platforms, tags, genres, search];
+    let names = [
+        "&page=",
+        "&ordering=",
+        "&platforms=",
+        "&tags=",
+        "&genres=",
+        "&search=",
+    ];
 
     let query = `https://api.rawg.io/api/games?key=${APIKEY}&page_size=32`;
 
     params.forEach((param, idx) => {
         if (param == "") {
-            param = savedParams[idx];
-        }
-        else if (param != "-") {
-            savedParams[idx] = param;
+            param = savedParams[idx].value;
+        } else if (param != "-") {
+            savedParams[idx].value = param;
         }
 
-        if (param != "-") {
+        if (param != "-" && savedParams[idx].isActive) {
             query = query + names[idx] + param;
         }
-    })
+    });
 
     return query;
 }
 
 async function LoadAllPlatforms() {
-    const apiCall = await fetch(`https://api.rawg.io/api/platforms?key=${APIKEY}`);
+    const apiCall = await fetch(
+        `https://api.rawg.io/api/platforms?key=${APIKEY}`
+    );
     const jsontodata = await apiCall.json();
-    
-    for (let i = 0; i < jsontodata.results.length - 28; i++)
-    {
+
+    for (let i = 0; i < jsontodata.results.length - 28; i++) {
         allPlatforms.set(jsontodata.results[i].name, jsontodata.results[i].id);
 
-        PlatformFilter.innerHTML = PlatformFilter.innerHTML + `<option value="${jsontodata.results[i].name}">${jsontodata.results[i].name}</option>`
+        PlatformFilter.innerHTML =
+            PlatformFilter.innerHTML +
+            `<option value="${jsontodata.results[i].name}">${jsontodata.results[i].name}</option>`;
     }
 }
 
-async function UpdateGameContentDisplayHome(){
+async function UpdateGameContentDisplayHome() {
+    savedParams[savedParamsName.get("tags")].isActive = false;
+    savedParams[savedParamsName.get("genres")].isActive = false;
+    savedParams[savedParamsName.get("search")].isActive = false;
+
     try {
-        const apiCall = await fetch(HOMEQUERY);
+        const apiCall = await fetch(
+            ConstructQuery("1", "released,metacritic", "-")
+        );
         const jsontodata = await apiCall.json();
         UpdateGameContentDisplay(jsontodata.results, true);
     } catch (error) {
@@ -364,7 +435,9 @@ async function CreateGamePage(gameID) {
     GameItemPageContainer.id = "Game_Item_Page_Container";
 
     GameItemPageContainer.innerHTML = `
-    <div class="Background_Art" style="background-image: linear-gradient(to bottom, rgba(15,15,15,0), rgb(21,21,21)),linear-gradient(to bottom, rgba(21,21,21,0.8), rgba(21,21,21,0.5)),url('${gameDetails.background_image}');"></div>
+    <div class="Background_Art" style="background-image: linear-gradient(to bottom, rgba(15,15,15,0), rgb(21,21,21)),linear-gradient(to bottom, rgba(21,21,21,0.8), rgba(21,21,21,0.5)),url('${
+        gameDetails.background_image
+    }');"></div>
     <h1 class="Game_Item_Title">${gameDetails.name}</h1>
     <div class="Rankings">
         <h3 class="Ranking_Item">
@@ -420,7 +493,11 @@ async function CreateGamePage(gameID) {
                     Age rating
                 </div>
                 <div class="Game_Item_Meta_Text">
-                    ${gameDetails.esrb_rating != null ? gameDetails.esrb_rating.name : "N/A"}
+                    ${
+                        gameDetails.esrb_rating != null
+                            ? gameDetails.esrb_rating.name
+                            : "N/A"
+                    }
                 </div>
             </div>
             <div class="Game_Item_Meta_Block_Wide">
@@ -449,15 +526,18 @@ async function CreateGamePage(gameID) {
 }
 
 async function UpdateGameContentDisplayGenre(genre = "", title = "") {
-    let apiCall = await fetch(
-        `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=metacritic,released&genres=${genre}`
-    );
+    savedParams[savedParamsName.get("tags")].isActive = false;
+    savedParams[savedParamsName.get("genres")].isActive = true;
+    savedParams[savedParamsName.get("search")].isActive = false;
+
+    let apiCall = await fetch(ConstructQuery("1", "metacritic,released", "-", "", genre));
     let jsontodata = await apiCall.json();
 
     if (jsontodata.results.length == 0) {
-        apiCall = await fetch(
-            `https://api.rawg.io/api/games?key=${APIKEY}&page=1&page_size=32&ordering=metacritic,released&tags=${genre}`
-        );
+        savedParams[savedParamsName.get("tags")].isActive = true;
+        savedParams[savedParamsName.get("genres")].isActive = false;
+
+        apiCall = await fetch(ConstructQuery("1", "metacritic,released", "-", genre));
         jsontodata = await apiCall.json();
     }
 

@@ -272,12 +272,12 @@ select option
     color: black;
 }
 
-.Order_Filter label, .Platform_Filter label
+.Order_Filter_Main label, .Platform_Filter_Main label
 {
     font-family: "kanit";
 }
 
-.Order_Filter, .Platform_Filter
+.Order_Filter_Main, .Platform_Filter_Main
 {
     border: none;
     border-radius: 1rem;
