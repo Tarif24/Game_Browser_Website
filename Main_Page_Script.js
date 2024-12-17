@@ -15,6 +15,7 @@ const PlatformFilter = document.querySelector("#Platform_Filter");
 const OrderFilter = document.querySelector("#Order_Filter");
 
 let allPlatforms = new Map();
+let listOfGames = [];
 
 // INITILIZING
 
@@ -78,12 +79,11 @@ document.querySelector("#GB_Header form").addEventListener("submit", async (even
     input.value = "";
 });
 
-document.querySelector("#Home").addEventListener("click", () => {
+document.querySelectorAll(".Home").forEach(home => {
+    home.addEventListener("click", () => {
     UpdateGameContentDisplayHome();
-
-    if (window.innerWidth < 1200){
-        ToggleMenu();
-    }
+    console.log("here");
+    })
 });
 
 // Changes the order of items displayed based on the order filter
@@ -114,6 +114,7 @@ document.querySelector("#Platform_Filter").addEventListener("change", async () =
 
 document.querySelector("#Show_More").addEventListener("click", async () => {
     let pageNum = Number(savedParams[savedParamsName.get("page")].value) + 1;
+    savedParams[savedParamsName.get("page")].value =  pageNum;
     console.log(pageNum);
     try {
         const apiCall = await fetch(
@@ -248,20 +249,26 @@ async function UpdateGameContentDisplayHome() {
     PlatformFilter.selectedIndex = 0;
     savedParams[savedParamsName.get("platforms")].value = "4";
     savedParams[savedParamsName.get("ordering")].value = "released,metacritic";
+
+    if (window.innerWidth < 1200){
+        ToggleMenu();
+    }
 }
 
 function UpdateGameContentDisplay(gameslist, isnew = true) {
     if (isnew) {
+        listOfGames = [];
         GameContentDisplayList.innerHTML = "";
-
-        gameslist.forEach((game) => {
-            GameContentDisplayList.append(CreateGameItem(game));
-        });
-    } else {
-        gameslist.forEach((game) => {
-            GameContentDisplayList.append(CreateGameItem(game));
-        });
     }
+
+    gameslist.forEach((game) => {
+
+        if (listOfGames.indexOf(game.id) == -1) {
+            GameContentDisplayList.append(CreateGameItem(game));
+            listOfGames.push(game.id);
+        }
+        
+    });
 
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";

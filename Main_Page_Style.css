@@ -522,6 +522,7 @@ select option
     padding: 1rem;
     font-size: 2rem;
     right: 100px;
+    top: 10rem;
     transition: all 0.2s ease-in-out;
 }
 
