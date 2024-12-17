@@ -78,8 +78,12 @@ document.querySelector("#GB_Header form").addEventListener("submit", async (even
     input.value = "";
 });
 
-document.querySelector("#Sidebar #Home").addEventListener("click", () => {
+document.querySelector("#Home").addEventListener("click", () => {
     UpdateGameContentDisplayHome();
+
+    if (window.innerWidth < 1200){
+        ToggleMenu();
+    }
 });
 
 // Changes the order of items displayed based on the order filter
@@ -139,6 +143,10 @@ document.querySelector("#Show_More").addEventListener("click", async () => {
                 genreText,
                 genre.querySelector("h3").innerText
             );
+
+            if (window.innerWidth < 1200){
+                ToggleMenu();
+            }
         });
     });
 })();
@@ -598,3 +606,13 @@ async function UpdateGameContentDisplayGenre(genre = "", title = "") {
     GBContent.style.display = "flex";
     GameItemPage.style.display = "none";
 }
+
+function ToggleMenu()
+{
+    const menu = document.querySelector(".Hamburger_Menu_Links");
+    const icon = document.querySelector(".Hamburger_Icon");
+
+    menu.classList.toggle("open");
+    icon.classList.toggle("open");
+}
+

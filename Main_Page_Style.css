@@ -116,6 +116,93 @@ html
     fill: rgb(0, 0, 0);
 }
 
+/* Hamburger Menu */
+
+#Hamburger_Nav
+{
+    display: none;
+    width: 100%;
+    position: absolute;
+}
+
+.Hamburger_Menu
+{
+    position: relative;
+    display: inline-block;
+    top: 0px;
+    left: 90%;
+}
+
+.Hamburger_Icon
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.Hamburger_Icon span
+{
+    width: 100%;
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+    transition: all 0.3s ease-in-out;
+}
+
+.Hamburger_Menu_Links
+{
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: fit-content;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.Hamburger_Menu_Links.open
+{
+    min-height: fit-content;
+    min-width: 200px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: rgb(53, 53, 53) 0.1rem solid;
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.Hamburger_Icon.open span:first-child
+{
+    transform: rotate(45deg) translate(10px, 5px);
+}
+
+.Hamburger_Icon.open span:nth-child(2)
+{
+    opacity: 0;
+}
+
+.Hamburger_Icon.open span:last-child
+{
+    transform: rotate(-45deg) translate(10px, -5px);
+}
+
+.Hamburger_Icon span:first-child
+{
+    transform: none;
+}
+
+.Hamburger_Icon span:nth-child(2)
+{
+    opacity: 1;
+}
+
+.Hamburger_Icon span:last-child
+{
+    transform: none;
+}
+
 /* Game Browser Main */
 
 #GB_Main
@@ -149,23 +236,29 @@ html
     font-weight: 500;
 }
 
-#Sidebar .Title_Hover
+.Title_Hover
 {
     transition: all 0.2s ease-in-out;
 }
 
-#Sidebar .Title_Hover h2
+.Title_Hover h2
 {
     transition: all 0.2s ease-in-out;
 }
 
-#Sidebar .Title_Hover:hover
+.Title_Hover:hover
 {
     cursor: pointer;
     color: rgb(114, 114, 114);
 }
 
-#Sidebar .Title_Hover h2:hover
+.Title_Hover h2:hover
+{
+    cursor: pointer;
+    color: rgb(114, 114, 114);
+}
+
+.Title_Hover h2:hover
 {
     cursor: pointer;
     color: rgb(114, 114, 114);

@@ -1,0 +1,12 @@
+@media screen and (max-width: 1200px)
+{
+    #Sidebar
+    {
+        display: none;
+    }
+
+    #Hamburger_Nav
+    {
+        display: flex;
+    }
+}
