@@ -1,5 +1,23 @@
 @media screen and (max-width: 1200px)
 {
+    #GB_Header
+    {
+        justify-content: space-between;
+        padding-left: 3rem;
+        margin-right: 3rem;
+        gap: 2rem;
+    }
+
+    #Logo
+    {
+        position: static;
+    }
+
+    #Searchbar
+    {
+        flex: 1;
+    }
+
     #Sidebar
     {
         display: none;

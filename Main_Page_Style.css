@@ -121,16 +121,13 @@ html
 #Hamburger_Nav
 {
     display: none;
-    width: 100%;
-    position: absolute;
+    width: 8rem;
 }
 
 .Hamburger_Menu
 {
     position: relative;
     display: inline-block;
-    top: 0px;
-    left: 90%;
 }
 
 .Hamburger_Icon
@@ -161,6 +158,7 @@ html
     max-height: 0;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
+    border-radius: 2rem;
 }
 
 .Hamburger_Menu_Links.open
