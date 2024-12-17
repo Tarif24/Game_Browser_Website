@@ -483,9 +483,6 @@ async function CreateGamePage(gameID) {
     <div class="Background_Art" style="background-image: linear-gradient(to bottom, rgba(15,15,15,0), rgb(21,21,21)),linear-gradient(to bottom, rgba(21,21,21,0.8), rgba(21,21,21,0.5)),url('${
         gameDetails.background_image
     }');"></div>
-    <div class="Back_Container">
-        <h2 class="Back">Back</h1>
-    </div>
     <h1 class="Game_Item_Title">${gameDetails.name}</h1>
     <div class="Rankings">
         <h3 class="Ranking_Item">
@@ -566,6 +563,10 @@ async function CreateGamePage(gameID) {
         <div class="Game_Item_System_Requierments">
             ${GameItemSystemRequierments.innerHTML}
         </div>
+    </div>
+
+    <div class="Back_Container">
+        <h2 class="Back">Back</h1>
     </div>
     `;
 

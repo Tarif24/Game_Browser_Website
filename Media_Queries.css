@@ -106,8 +106,13 @@
         text-align: center;
         top: 7rem;
         left: 3rem;
-        right: 80%;
+        right: 70%;
         padding: 0rem;
+    }
+
+    .Background_Art
+    {
+        height: 40vh;
     }
 
 }
@@ -137,18 +142,51 @@
         align-items: center;
     }
 
+    #Game_Item_Page_Container
+    {
+        padding: 1rem 1rem 1rem 1rem;
+        margin-top: 5rem;
+        width: 90%;
+    }
+
+    .Background_Art
+    {
+        height: 25vh;
+    }
+
     .Back
     {
-        top: 7rem;
-        left: 3rem;
-        right: 3rem;
-        padding: 0rem;
+        margin-top: 4rem;
+        position: static;
+    }
+
+    .Game_Item_Title
+    {
+        font-size: 3rem;
+    }
+
+    .Rankings
+    {
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .Ranking_Item
+    {
+        font-size: 1rem;
+        text-align: center;
     }
 
     .About p:nth-child(2)
     {
         text-align: justify;
     }   
+
+    .Game_Item_Meta
+    {
+        height: fit-content;
+    }
 }
 
 @media screen and (max-width: 500px)
@@ -169,13 +207,6 @@
         font-size: 3rem;
     }
 
-    #GB_Content_Filters
-    {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-
     #GB_Header
     {
         gap: 2rem;
@@ -184,6 +215,7 @@
         justify-content: center;
         align-items: center;
         margin-left: 0;
+        margin-top: 3rem;
     }
 
     .Header_Nav
@@ -200,5 +232,55 @@
     {
         flex: 0.85;
         margin-right: 0rem;
+    }
+
+    #Game_Item_Page_Container
+    {
+        margin-top: 1rem;
+    }
+
+    .Background_Art
+    {
+        height: 20vh;
+    }
+
+    .Game_Item_Title
+    {
+        font-size: 2.5rem;
+    }
+
+    .About_Title
+    {
+        font-size: 1rem;
+    }
+
+    .About p:nth-child(n + 1)
+    {
+        font-size: 0.75rem;
+    }
+
+    .Game_Item_Meta_Title
+    {
+        font-size: 0.9rem;
+    }
+
+    .Game_Item_Meta_Text
+    {
+        font-size: 0.75rem;
+    }
+
+    .System_Requierments_Title
+    {
+        font-size: 1rem;
+    }
+
+    .Requierment_Title
+    {
+        font-size: 0.85rem;
+    }
+
+    .Requierment_Item
+    {
+        font-size: 0.75rem;
     }
 }

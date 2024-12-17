@@ -496,7 +496,7 @@ select option
     position: absolute;
     top: 0;
     left: 0;
-    height: 500px;
+    height: 50vh;
     width: 99vw;
     background-color: transparent;
     z-index: -1;
@@ -584,12 +584,13 @@ select option
     flex-wrap: wrap;
     height: 550px;
     width: 100%;
+    justify-content: space-between;
 }
 
 .Game_Item_Meta_Block
 {
     margin-bottom: 1.5rem;
-    width: 50%;
+    width: 45%;
 }
 
 .Game_Item_Meta_Block_Wide
