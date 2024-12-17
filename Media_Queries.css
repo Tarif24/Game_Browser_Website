@@ -94,6 +94,22 @@
         width: 500px;
         height: 285px;
     }
+
+    #Game_Item_Page_Container
+    {
+        width: 80%;
+        margin-top: 6rem;
+    }
+
+    .Back
+    {
+        text-align: center;
+        top: 7rem;
+        left: 3rem;
+        right: 80%;
+        padding: 0rem;
+    }
+
 }
 
 @media screen and (max-width: 600px)
@@ -120,6 +136,19 @@
         gap: 1rem;
         align-items: center;
     }
+
+    .Back
+    {
+        top: 7rem;
+        left: 3rem;
+        right: 3rem;
+        padding: 0rem;
+    }
+
+    .About p:nth-child(2)
+    {
+        text-align: justify;
+    }   
 }
 
 @media screen and (max-width: 500px)

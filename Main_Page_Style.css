@@ -127,6 +127,7 @@ html
     width: fit-content;
     align-items: center;
     height: 100%;
+    z-index: 2;
 }
 
 .Hamburger_Menu
