@@ -21,6 +21,7 @@ let listOfGames = [];
 
 // calls all the initializing functions
 (async () => {
+
     await LoadAllPlatforms();
 
     InitilizeQueryParams();
@@ -35,6 +36,9 @@ function InitialAPICall() {
 // Initial Event listeners
 document.querySelector("#Logo").addEventListener("click", () => {
     UpdateGameContentDisplayHome();
+    if (window.innerWidth < 1200){
+        ToggleMenu();
+    }
 });
 
 // Searchbar functionality
@@ -82,7 +86,9 @@ document.querySelector("#GB_Header form").addEventListener("submit", async (even
 document.querySelectorAll(".Home").forEach(home => {
     home.addEventListener("click", () => {
     UpdateGameContentDisplayHome();
-    console.log("here");
+    if (window.innerWidth < 1200){
+        ToggleMenu();
+    }
     })
 });
 
@@ -249,10 +255,6 @@ async function UpdateGameContentDisplayHome() {
     PlatformFilter.selectedIndex = 0;
     savedParams[savedParamsName.get("platforms")].value = "4";
     savedParams[savedParamsName.get("ordering")].value = "released,metacritic";
-
-    if (window.innerWidth < 1200){
-        ToggleMenu();
-    }
 }
 
 function UpdateGameContentDisplay(gameslist, isnew = true) {
