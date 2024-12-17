@@ -45,11 +45,6 @@ html
     margin-bottom: 0rem;
 }
 
-#GB_Header:first-child
-{
-    margin-left: 0;
-}
-
 #Logo
 {
     display: flex;
@@ -66,6 +61,14 @@ html
 #Logo:hover
 {
     cursor: pointer;
+}
+
+.Header_Nav
+{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #Searchbar
@@ -121,13 +124,16 @@ html
 #Hamburger_Nav
 {
     display: none;
-    width: 8rem;
+    width: fit-content;
+    align-items: center;
+    height: 100%;
 }
 
 .Hamburger_Menu
 {
     position: relative;
     display: inline-block;
+    width: 30px;
 }
 
 .Hamburger_Icon
