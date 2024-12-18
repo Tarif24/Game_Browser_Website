@@ -27,6 +27,8 @@ let listOfGames = [];
     InitilizeQueryParams();
 
     InitialAPICall();
+
+    HamburgerMenuSetup()
 })();
 
 function InitialAPICall() {
@@ -36,9 +38,6 @@ function InitialAPICall() {
 // Initial Event listeners
 document.querySelector("#Logo").addEventListener("click", () => {
     UpdateGameContentDisplayHome();
-    if (window.innerWidth < 1200){
-        ToggleMenu();
-    }
 });
 
 // Searchbar functionality
@@ -159,6 +158,19 @@ document.querySelector("#Show_More").addEventListener("click", async () => {
 })();
 
 // HELPER FUNCTIONS
+
+function HamburgerMenuSetup(){
+    // // Closes hamburger menu when clicked off screen
+    // const navOpen = document.querySelector(".open");
+    // const menuLinks = document.querySelector(".Hamburger_Menu_Links");
+
+    // document.addEventListener( "click", (e) => {
+    //     console.log(e.target.classList);
+    //     if(e.target.classList !== ".open" && menuLinks.classList == ".open") {
+    //         ToggleMenu();
+    //     }
+    // });
+}
 
 function InitilizeQueryParams() {
     savedParamsName.set("page", 0);
@@ -621,8 +633,11 @@ function ToggleMenu()
 {
     const menu = document.querySelector(".Hamburger_Menu_Links");
     const icon = document.querySelector(".Hamburger_Icon");
+    const body = document.querySelector("body");
 
+    window.scrollTo(0, 0, "instant");
     menu.classList.toggle("open");
-    icon.classList.toggle("open");
+    icon.classList.toggle("Open_Icon");
+    body.classList.toggle("Stop_Scroll");
 }
 
