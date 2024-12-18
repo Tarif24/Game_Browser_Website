@@ -110,12 +110,13 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+        overflow-y: scroll;
     }
 
     .Order_Filter_Main, .Platform_Filter_Main
     {
         display: flex;
-        width: 60%;
+        min-width: 60%;
         justify-content: space-between;
     }
 

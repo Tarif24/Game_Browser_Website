@@ -400,6 +400,8 @@ select
     outline: none;
     font-family: "kanit";
     font-weight: 300;
+    text-align: center;
+    width: 100px;
 }
 
 select:hover

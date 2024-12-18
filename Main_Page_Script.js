@@ -162,7 +162,6 @@ document.querySelector("#Show_More").addEventListener("click", async () => {
 function HamburgerMenuSetup(){
      // Closes hamburger menu when clicked off screen
      document.addEventListener( "click", (e) => {
-         console.log(e.target.classList);
          if(e.target.classList == "Hamburger_Menu_Back open") {
              ToggleMenu();
          }
