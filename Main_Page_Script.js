@@ -160,16 +160,13 @@ document.querySelector("#Show_More").addEventListener("click", async () => {
 // HELPER FUNCTIONS
 
 function HamburgerMenuSetup(){
-    // // Closes hamburger menu when clicked off screen
-    // const navOpen = document.querySelector(".open");
-    // const menuLinks = document.querySelector(".Hamburger_Menu_Links");
-
-    // document.addEventListener( "click", (e) => {
-    //     console.log(e.target.classList);
-    //     if(e.target.classList !== ".open" && menuLinks.classList == ".open") {
-    //         ToggleMenu();
-    //     }
-    // });
+     // Closes hamburger menu when clicked off screen
+     document.addEventListener( "click", (e) => {
+         console.log(e.target.classList);
+         if(e.target.classList == "Hamburger_Menu_Back open") {
+             ToggleMenu();
+         }
+     });
 }
 
 function InitilizeQueryParams() {
@@ -633,11 +630,21 @@ function ToggleMenu()
 {
     const menu = document.querySelector(".Hamburger_Menu_Links");
     const icon = document.querySelector(".Hamburger_Icon");
+    const back = document.querySelector(".Hamburger_Menu_Back");
     const body = document.querySelector("body");
-
+    
     window.scrollTo(0, 0, "instant");
     menu.classList.toggle("open");
     icon.classList.toggle("Open_Icon");
+    back.classList.toggle("open");
     body.classList.toggle("Stop_Scroll");
+
+    if (back.classList == "Hamburger_Menu_Back open") {
+        back.style.width = "100vw"
+        back.style.height = "100vh"
+    } else{
+        back.style.width = "0vw"
+        back.style.height = "0vh"
+    }
 }
 

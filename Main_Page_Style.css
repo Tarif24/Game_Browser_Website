@@ -159,6 +159,15 @@ html
     transition: all 0.3s ease-in-out;
 }
 
+.Hamburger_Menu_Back
+{
+    width: 0vw;
+    height: 0vh;
+    background: rgba(255, 255, 255, 0);
+    z-index: 1;
+    position: absolute;
+}
+
 .Hamburger_Close
 {
     display: flex;
