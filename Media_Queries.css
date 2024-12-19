@@ -1,7 +1,7 @@
 @media screen and (max-width: 1200px) {
     #GB_Header {
-        margin-left: 1rem;
-        gap: 2rem;
+        margin-left: 3rem;
+        gap: 1rem;
     }
 
     #Logo {
@@ -9,7 +9,7 @@
     }
 
     #Searchbar {
-        flex: 1;
+        flex: 0.85;
         margin-right: 2rem;
     }
 }
@@ -23,6 +23,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .Hamburger_Menu_Links.open
+    {
+        top: -1rem;
     }
 
     .Header_Nav {
@@ -110,7 +115,6 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
-        overflow-y: scroll;
     }
 
     .Order_Filter_Main, .Platform_Filter_Main
@@ -160,6 +164,11 @@
 }
 
 @media screen and (max-width: 500px) {
+    .Hamburger_Menu_Links.open
+    {
+        top: -3rem;
+    }
+   
     .Game_Item {
         width: 80%;
     }

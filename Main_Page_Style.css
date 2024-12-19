@@ -4,6 +4,7 @@
 {
     margin: 0;
     padding: 0;
+    scrollbar-gutter: stable;
     /* border: rgb(0, 0, 0) 0.1rem solid; */
 }
 
@@ -15,6 +16,7 @@ body
     font-family: 'Poppins', sans-serif;
     background: rgb(21, 21, 21);
     color: white;
+    overflow-x: hidden;
 }
 
 .Stop_Scroll
@@ -163,9 +165,10 @@ html
 {
     width: 0vw;
     height: 0vh;
-    background: rgba(255, 255, 255, 0);
+    background: rgba(0 , 0, 0, 0.5);
     z-index: 1;
     position: absolute;
+    transition: all 0.1s ease-in-out;
 }
 
 .Hamburger_Close
@@ -276,6 +279,12 @@ html
     gap: 1rem;
     padding-left: 50px;
     padding-top: 50px;
+}
+
+#Sidebar_Container
+{
+    position: sticky;
+    top: 50px;
 }
 
 .Sidebar_Group_Title
