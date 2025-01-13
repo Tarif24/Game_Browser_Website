@@ -74,7 +74,7 @@
         width: 500px;
     }
 
-    .Game_Image {
+    .Game_Image_Video_Container {
         width: 500px;
         height: 285px;
     }
@@ -102,7 +102,7 @@
         width: 400px;
     }
 
-    .Game_Image {
+    .Game_Image_Video_Container {
         width: 400px;
         height: 230px;
     }
@@ -173,7 +173,7 @@
         width: 80%;
     }
 
-    .Game_Image {
+    .Game_Image_Video_Container {
         width: 100%;
         height: 75%;
     }

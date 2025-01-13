@@ -120,7 +120,6 @@ document.querySelector("#Platform_Filter").addEventListener("change", async () =
 document.querySelector("#Show_More").addEventListener("click", async () => {
     let pageNum = Number(savedParams[savedParamsName.get("page")].value) + 1;
     savedParams[savedParamsName.get("page")].value =  pageNum;
-    console.log(pageNum);
     try {
         const apiCall = await fetch(
             ConstructQuery(pageNum)
@@ -329,11 +328,14 @@ function CreateGameItem(game) {
     gameItemLI.setAttribute("gameid", game.id);
     gameItemLI.className = "Game_Item";
     gameItemLI.innerHTML = `
-    <img
-        class="Game_Image"
-        src="${game.background_image != null? game.background_image : "assets/no-image-icon.svg"}"
-        alt="Game Image"
-    />
+    <div class="Game_Image_Video_Container">
+        <img
+            class="Game_Image"
+            src="${game.background_image != null? game.background_image : "assets/no-image-icon.svg"}"
+            alt="Game Image"
+        />
+
+    </div>
     <div class="Game_Info">
        <div class="Game_Info_Top">
             <p class="Game_Platforms">
@@ -364,6 +366,14 @@ function CreateGameItem(game) {
         GBContent.style.display = "none";
         GameItemPage.style.display = "flex";
     });
+
+    gameItemLI.querySelector(".Game_Image_Video_Container").addEventListener("mouseover", (event) => {
+        event.target.querySelector(".Game_Image").style.display = "none";
+    })
+
+    gameItemLI.querySelector(".Game_Image_Video_Container").addEventListener("mouseleave", (event) => {
+        event.target.querySelector(".Game_Image").style.display = "static";
+    })
 
     return gameItemLI;
 }

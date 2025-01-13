@@ -473,10 +473,16 @@ select option
     padding: 0rem 1rem 1rem 1rem;
 }
 
-.Game_Image
+.Game_Image_Video_Container
 {
     width: 385px;
     height: 220px;
+}
+
+.Game_Image
+{
+    width: 100%;
+    height: 100%;
     border-radius: 2rem 2rem 0 0;
 }
 
