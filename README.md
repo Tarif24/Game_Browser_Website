@@ -78,7 +78,7 @@ This is only if you would like to replicate or make a project similar to this
 
 1. Clone the repo
     ```sh
-    git clone https://github.com/Tarif24/Portfolio_Website.git
+    git clone https://github.com/Tarif24/Game_Browser_Website.git
     ```
     or just copy the zip file from this repo
 2. After this you should be good to go just look over the files and personalize it to fit your needs
